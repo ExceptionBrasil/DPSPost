@@ -54,39 +54,36 @@ let Send = (event) => {
 
 
     var xRequest = new XMLHttpRequest();
+    xRequest.withCredentials = true;
+
     xRequest.open(Method.value, Url.value, true);
 
     //Adiciona os Headers
     if (parameter !== 0) {        
         var headers = {}
 
-        xRequest.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+       // xRequest.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         for (var i = 1; i <= parameter; i++) {
             var header =document.querySelector("#Header"+i) ;
             var value =document.querySelector("#Value"+i);
 
-            if (header !== "" || typeof (header) !== "undefined" || header !== null) {
-                //headers[header.value] = value.value;
-                xRequest.setRequestHeader(headers);
+            if (header !== "" || typeof (header) !== "undefined" || header !== null) {         
+                xRequest.setRequestHeader(header.value, value.value);
             }            
         }
 
-        //
-        //xRequest.setRequestHeader(headers);
     }
     
-
-
-
+    
     if (Method.value === "GET") {
-        xRequest.send(null);
+        xRequest.send();
     } else {
         xRequest.send(Data.value);
     }
 
     
     //Faz um reload básico para limpar tudo
-    location.reload();
+    //location.reload();
 }
 
 //Adiciona um novo parâmetro em tela
