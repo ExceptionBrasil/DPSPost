@@ -5,27 +5,39 @@
            Personalize a política de segurança de conteúdo na marca meta abaixo, conforme necessário. Adicione 'unsafe-inline' ao default-src para habilitar o JavaScript embutido.
     Para obter mais detalhes, consulte http://go.microsoft.com/fwlink/?LinkID=617521
        -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=yes">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../Content/bootstrap.min.css" />
+    <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
+    
+    
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/site.css" />
+    
+    <link rel="stylesheet" type="text/css" href="EnlighterJS/Build/EnlighterJS.min.css" />
+    <script type="text/javascript" src="EnlighterJS/Resources/MooTools.min.js"></script>
+    <script type="text/javascript" src="EnlighterJS/Build/EnlighterJS.min.js"></script>
 
+    <!-- Special Styles -->
+    <style type="text/css">
+        /* custom hover effect using specific css class */
+        .EnlighterJS.myHoverClass li:hover {
+            background-color: #c0c0c0;
+        }
+    </style>
+
+    <meta name="EnlighterJS" content="Advanced javascript based syntax highlighting" data-language="javascript" data-indent="2" data-selector-block="pre" data-selector-inline="code" />
     <title>DPS Post Service</title>
 </head>
 <body>
     <nav class="navbar navbar-expand bg-dark navbar-dark">
         <div class="col col-sm-6">
             <a class="navbar-brand" href="#">
-                <img src="../Content/images/icons-png/navigation-white.png" />
+                <img src="Content/images/icons-png/navigation-white.png" />
                 DPS Post Service
             </a>
-        </div>
-        <div class="col-sm-6 text-right">
-            <button class="btn btn-outline-info" type="button" id="Send">Send</button>
         </div>
     </nav>
     <div class="container">
@@ -34,8 +46,8 @@
                 <form action="#" method="post" class="form-control">
                     <div class="form-group">
                         Send Method:
-                        <select class="ui-select" id="Method">
-                            <option value=""></option>
+                        <select class="custom-select" id="Method" data-toggle="popover" data-content="This field is required!">
+                            <option disabled selected value> Select an option </option>
                             <option value="POST">POST</option>
                             <option value="GET">GET</option>
                             <option value="PUT">PUT</option>
@@ -53,22 +65,49 @@
                     </div>
 
                     <div class="text-center">
-                        <button id="btnHeader" class="btn btn-info"><img class="" src="../Content/images/icons-png/plus-white.png" /> Add Parameter</button>
+                        <button id="btnHeader" class="btn btn-info"><img class="" src="Content/images/icons-png/plus-white.png" /> Add Parameter</button>
                     </div>
                     <br />
 
                     <div class="text-center">
                         <label for="Body"><h4 class="text-center">Body</h4></label>
+                        <br />
+                        <button id="btnBody" class="btn btn-outline-warning"><img class="" src="Content/images/icons-png/plus-white.png" /> Add Body</button>
+                        <br />
+                        <br />
+                        <textarea class="form-text form-control" rows="5" id="Body"></textarea>
+                        <br />
                     </div>
-                    <textarea class="form-text form-control" rows="5" id="Body"></textarea>
-                    
+                    <div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center" id="resultModalLabel">Result</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="modalResultBody">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
+        <footer>
+            <div class="text-center">
+                <button class="btn btn-outline-info btn-block" type="button" id="Send">Send</button>
+            </div>
+
+        </footer>
 
         <script type="text/javascript" src="scripts/index.js"></script>
         <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-        <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/DPSPost/App.js"></script>
+
 </body>
 </html>

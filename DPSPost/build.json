@@ -1,11 +1,11 @@
 {
      "android": {
-         "release": {
-             "keystore": "",
-             "storePassword": "",
-             "alias": "",
-             "password" : "",
-             "keystoreType": ""
-         }
+      "release": {
+        "keystore": "C:\\temp\\DPSPost.keystore",
+        "storePassword": "Shum@gor@27",
+        "alias": "DPSPost",
+        "password": "Shum@gor@27",
+        "keystoreType": ""
+      }
      }
  }

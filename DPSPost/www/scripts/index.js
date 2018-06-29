@@ -6,6 +6,7 @@
     "use strict";
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+  
 
     function onDeviceReady() {
         // Manipular eventos de pausa e retomada do Cordova
@@ -13,6 +14,8 @@
         document.addEventListener( 'resume', onResume.bind( this ), false );
         
         // TODO: o Cordova foi carregado. Execute qualquer inicialização que exija o Cordova aqui.
+      
+
         var parentElement = document.getElementById('deviceready');
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
