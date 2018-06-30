@@ -1,7 +1,13 @@
-﻿var parameter = 0;
+﻿///<summary>
+/// Variáveis globais
+///</summary>
+var parameter = 0;
 
 
-
+///<summary>
+///Inicialização do documento
+///Adiciona eventos aos objetos do DOM
+///</summary>
 $(document).ready(function () {
 
     //Adiciona event listeners
@@ -23,8 +29,11 @@ $(document).ready(function () {
 
 })
 
+///<summary>
+///Função principal 
+/// Faz o envio das informções 
+///</summary>
 
-//Faz o envio das informações
 let Send = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -77,11 +86,8 @@ let Send = (event) => {
     //----------------------------
     var xRequest = new XMLHttpRequest();
 
-    //Identifica se as credenciais são obrigatorias
-    //xRequest.withCredentials = true;
-
-
-    //Mensagem de progresso 
+    
+    //Mensagens de progresso 
     xRequest.addEventListener("progress", function (oEvent) {
         var percent = (oEvent.loaded / oEvent.total) * 100;
 
@@ -128,10 +134,11 @@ let Send = (event) => {
     //Abre a conexão
     xRequest.open(Method.value, Url.value, true);
 
+    //Adiciona ao header o uso do cache
     xRequest.setRequestHeader("Cache-Control", "no-cache");
 
 
-    //Adiciona os Headers
+    //Adiciona os Headers personalizados do cliente
     if (parameter !== 0) {
         var headers = {}
 
@@ -141,7 +148,7 @@ let Send = (event) => {
             var value = document.querySelector("#Value" + i);
 
             if (header !== "" || typeof (header) !== "undefined" || header !== null) {
-                xRequest.setRequestHeader(header.value, value.value);
+                xRequest.setRequestHeader(header.value.trim(), value.value.trim());
             }
         }
 
@@ -150,17 +157,20 @@ let Send = (event) => {
     
     //Trata o retorno da informação 
     xRequest.onload = function () {
+
+        //Retorno 
         var json = xRequest.responseText; //JSON.parse(xRequest.responseText);
 
+        //Faz a perfumaria do retorno
         if (xRequest.readyState === 4 && xRequest.status === 200) {
             var result = document.querySelector("#Result");
-            addInfoModal(`<pre id="Enli" data-enlighter-language="json" data-enlighter-highlight="5" data-enlighter-group="group1"">
+            addInfoModal(`<pre class="prettyprint" id="Enli" data-enlighter-language="json" data-enlighter-highlight="5" data-enlighter-group="group1"">
                         `+ json + `
                         </pre>`);
             $('#resultModal').modal('show');
         } else {
             var result = document.querySelector("#Result");
-            addInfoModal(`pre id="Enli" data-enlighter-language="json" data-enlighter-highlight="5" data-enlighter-group="group1"">
+            addInfoModal(`pre class="prettyprint" id="Enli" data-enlighter-language="json" data-enlighter-highlight="5" data-enlighter-group="group1"">
                         `+ json + `
                         </pre>`);
             $('#resultModal').modal('show');
@@ -209,7 +219,9 @@ let addNewParameter = (event) => {
 }
 
 
-
+///<summary>
+/// Fução para exibir ou escoder o body
+///</summary>
 let showBody = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -217,7 +229,9 @@ let showBody = (event) => {
     textAreaBody.hidden = !textAreaBody.hidden;
 }
 
-
+///<summary>
+/// Adiciona um texto ao body do modal que trata a resposta de retorno
+///</summary>
 let addInfoModal = (text) => {
     document.querySelector("#modalResultBody").innerHTML += text;
 }
