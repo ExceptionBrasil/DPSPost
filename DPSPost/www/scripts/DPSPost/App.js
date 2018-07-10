@@ -21,7 +21,11 @@ $(document).ready(function () {
     btnHeader = document.querySelector("#btnBody");
     btnHeader.addEventListener("click", showBody);
 
-
+    //About button
+    btnAbout = document.querySelector("#About");
+    btnAbout.addEventListener("click", function () {
+        $('#aboutModal').modal('show');
+    });
 
     //Tratativa do Send
     btnSend = document.querySelector("#Send");
