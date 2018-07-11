@@ -10,26 +10,52 @@ var parameter = 0;
 ///</summary>
 $(document).ready(function () {
 
-    //Adiciona event listeners
-    btnHeader = document.querySelector("#btnHeader");
+    //-- Variáveis --
+    var btnHeader    = document.querySelector("#btnHeader");
+    var textAreaBody = document.querySelector("#Body");
+    var btnBody = document.querySelector("#btnBody");
+    var btnAbout = document.querySelector("#About");
+    var btnSend = document.querySelector("#Send");
+    var url = document.querySelector("#Url");
+    var footer = document.querySelector("footer");
+    var Method = document.querySelector("#Method");
+
+
+    //Adiciona mais Headers
     btnHeader.addEventListener("click", addNewParameter);
 
-    //Oculta a caixa body
-    textAreaBody = document.querySelector("#Body");
+    //Oculta a caixa body    
     textAreaBody.hidden = true;
 
-    btnHeader = document.querySelector("#btnBody");
-    btnHeader.addEventListener("click", showBody);
+    //exibe a caixa de Body    
+    btnBody.addEventListener("click", showBody);
 
-    //About button
-    btnAbout = document.querySelector("#About");
+    //Mostra o modal About 
     btnAbout.addEventListener("click", function () {
         $('#aboutModal').modal('show');
     });
 
     //Tratativa do Send
-    btnSend = document.querySelector("#Send");
     btnSend.addEventListener("click", Send);
+
+
+    //Cofigura a posição do controle Send com base no footer
+   /* url.addEventListener("blur", function () {
+        $(footer).addClass("up");
+    })
+
+    btnHeader.addEventListener("blur", function () {
+        $(footer).removeClass("up");
+    })
+    Method.addEventListener("blur", function () {
+        $(footer).removeClass("up");
+    })
+    textAreaBody.addEventListener("blur", function () {
+        $(footer).addClass("up");
+    })
+    btnBody.addEventListener("blur", function () {
+        $(footer).removeClass("up");
+    })*/
 
 })
 
@@ -95,11 +121,24 @@ let Send = (event) => {
     xRequest.addEventListener("progress", function (oEvent) {
         var percent = (oEvent.loaded / oEvent.total) * 100;
 
-        if (isNaN(percent) || typeof (percent) === "undefined") {
+        if (isNaN(percent) || typeof (percent) === "undefined" ) {
 
             percent = 50;
 
         }
+
+        if (percent > 100) {
+            percent = 100;
+        }
+
+        if (percent < 100) {
+            percent = 0;
+        }
+
+        if (typeof (percent) !== "number") {
+            percent = 0;
+        }
+
         var result = document.querySelector("#Result");
         addInfoModal(`<div class="progress">                          
                           <div class="progress-bar" role="progressbar" style="width: `+ percent + `%" aria-valuenow="` + percent + `" aria-valuemin="0" aria-valuemax="100">` + percent + `%</div>

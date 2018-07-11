@@ -14,7 +14,7 @@
         document.addEventListener( 'resume', onResume.bind( this ), false );
         
         // TODO: o Cordova foi carregado. Execute qualquer inicialização que exija o Cordova aqui.
-      
+        
 
         var parentElement = document.getElementById('deviceready');
         var listeningElement = parentElement.querySelector('.listening');
